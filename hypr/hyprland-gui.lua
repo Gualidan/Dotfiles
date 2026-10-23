@@ -28,6 +28,9 @@ hl.config({
         numlock_by_default = true,
         sensitivity = -0.45,
     },
+    misc = {
+        animate_mouse_windowdragging = false,
+    },
     scrolling = {
         column_width = 0.5,
     },
@@ -74,7 +77,9 @@ hl.unbind("SUPER + F")
 hl.bind("SUPER + F", hl.dsp.window.pin())
 hl.unbind("SUPER + CTRL + F")
 hl.bind("SUPER + CTRL + F", hl.dsp.layout("colresize 1.0"))
+hl.unbind("SUPER + equal")
 hl.bind("SUPER + equal", hl.dsp.layout("colresize +0.05"))
+hl.unbind("SUPER + parenright")
 hl.bind("SUPER + parenright", hl.dsp.layout("colresize -0.05"))
 
 -- Window rules
@@ -85,9 +90,30 @@ hl.window_rule({
     },
     opacity = "1.00 1.00",
 })
+hl.window_rule({
+    name = "Zed settings floating",
+    match = {
+        title = "^(Zed — Settings)$",
+    },
+    float = true,
+})
+hl.window_rule({
+    name = "Arch-Update floating",
+    match = {
+        class = "^(com\\.mitchellh\\.ghostty)$",
+        title = "^(arch-update)$",
+    },
+    float = true,
+})
+hl.window_rule({
+    name = "Zed on workspace 1",
+    match = {
+        class = "^(dev.zed.Zed)$",
+    },
+    workspace = 1,
+})
 
 -- Autostart
 hl.on("hyprland.start", function()
     hl.exec_cmd("arch-update --tray --enable")
-    hl.exec_cmd("phonto /home/aidan/Videos/Pixel_Sakura.mp4")
 end)
