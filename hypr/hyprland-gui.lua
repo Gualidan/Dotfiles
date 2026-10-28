@@ -2,38 +2,48 @@
 
 -- Settings
 hl.config({
-    decoration = {
-        active_opacity = 1.0,
-        blur = {
-            brightness = 1.48,
-            contrast = 0.94,
-            enabled = true,
-            noise = 0.013,
-            popups = true,
-            size = 100,
-            special = false,
-        },
-        dim_inactive = false,
-        inactive_opacity = 1.0,
-        rounding = 4,
-    },
-    general = {
-        gaps_in = 4,
-        layout = "scrolling",
-        snap = {
-            enabled = true,
-        },
-    },
-    input = {
-        numlock_by_default = true,
-        sensitivity = -0.45,
-    },
-    misc = {
-        animate_mouse_windowdragging = false,
-    },
-    scrolling = {
-        column_width = 0.5,
-    },
+	decoration = {
+		active_opacity = 1.0,
+		blur = {
+			brightness = 1.48,
+			contrast = 0.94,
+			enabled = true,
+			noise = 0.013,
+			popups = true,
+			size = 100,
+			special = false,
+		},
+		dim_inactive = false,
+		inactive_opacity = 1.0,
+		rounding = 4,
+	},
+	general = {
+		gaps_in = 4,
+		layout = "scrolling",
+		snap = {
+			enabled = true,
+		},
+	},
+	input = {
+		numlock_by_default = true,
+		sensitivity = -0.45,
+	},
+	misc = {
+		animate_mouse_windowdragging = false,
+	},
+	scrolling = {
+		column_width = 0.5,
+	},
+})
+
+-- Monitors
+hl.monitor({
+	output = "HDMI-A-1",
+	disabled = false,
+	mode = "1920x1080@74.97Hz",
+	position = "0x0",
+	scale = 1,
+	cm = "srgb",
 })
 
 -- Keybinds
@@ -81,39 +91,48 @@ hl.unbind("SUPER + equal")
 hl.bind("SUPER + equal", hl.dsp.layout("colresize +0.05"))
 hl.unbind("SUPER + parenright")
 hl.bind("SUPER + parenright", hl.dsp.layout("colresize -0.05"))
+hl.unbind("ALT + C")
+hl.bind("ALT + C", hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
+hl.unbind("XF86AudioNext")
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("noctalia msg media next"), {
+	locked = true,
+})
+hl.unbind("XF86AudioPrev")
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("noctalia msg media previous"), {
+	locked = true,
+})
+hl.unbind("XF86AudioPlay")
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("noctalia msg media toggle"), {
+	locked = true,
+})
 
 -- Window rules
 hl.window_rule({
-    name = "Firefox opaque",
-    match = {
-        class = "^(firefox)$",
-    },
-    opacity = "1.00 1.00",
+	name = "Firefox opaque",
+	match = {
+		class = "^(firefox)$",
+	},
+	opacity = "1.00 1.00",
 })
 hl.window_rule({
-    name = "Zed settings floating",
-    match = {
-        title = "^(Zed — Settings)$",
-    },
-    float = true,
+	name = "Zed settings floating",
+	match = {
+		title = "^(Zed — Settings)$",
+	},
+	float = true,
 })
 hl.window_rule({
-    name = "Arch-Update floating",
-    match = {
-        class = "^(com\\.mitchellh\\.ghostty)$",
-        title = "^(arch-update)$",
-    },
-    float = true,
+	name = "Arch-Update floating",
+	match = {
+		class = "^(com\\.mitchellh\\.ghostty)$",
+		title = "^(arch-update)$",
+	},
+	float = true,
 })
 hl.window_rule({
-    name = "Zed on workspace 1",
-    match = {
-        class = "^(dev.zed.Zed)$",
-    },
-    workspace = 1,
+	name = "Zed on workspace 1",
+	match = {
+		class = "^(dev.zed.Zed)$",
+	},
+	workspace = 1,
 })
-
--- Autostart
-hl.on("hyprland.start", function()
-    hl.exec_cmd("arch-update --tray --enable")
-end)
