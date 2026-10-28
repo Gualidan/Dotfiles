@@ -1,4 +1,4 @@
-theme = noctalia
+theme = One Dark Two
 font-family = "Jetbrains Mono Nerd Font"
 shell-integration = fish
 command = /usr/bin/fish --login --interactive
